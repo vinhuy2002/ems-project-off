@@ -1,0 +1,21 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/InstrumentSerif-Regular.ttf",
+      "sha1": "fe806f19fde011deddb15c2207732b938d7ec434"
+    },
+    {
+      "path": "src/assets/fonts/Inter-Bold.ttf",
+      "sha1": "8ff32332776a23056827df16c79fe6a290a1df5a"
+    },
+    {
+      "path": "src/assets/fonts/Inter-Medium.ttf",
+      "sha1": "8bdd66f018907546dcdc10159abcd3b24c9d7bed"
+    },
+    {
+      "path": "src/assets/fonts/Inter-Regular.ttf",
+      "sha1": "411be8db58dac4933c7ac9ecf20af357f242a38a"
+    }
+  ]
+}
