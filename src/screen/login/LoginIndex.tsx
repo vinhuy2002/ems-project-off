@@ -1,43 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, TouchableHighlight } from "react-native";
+import { View, Text, TextInput, TouchableHighlight, Alert } from "react-native";
 import styles from './styles';
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import {
-    authActions,
-    selectError,
-    selectIsLoggedIn,
-    selectUserInfo,
-} from './authSlice';
-
-
+import EncryptedStorage from 'react-native-encrypted-storage';
+import { Account } from "../../models/common";
+import { handleLogin, userInfo } from "../../api/authApi";
 
 const LoginIndex = ({ navigation }: any) => {
-    const dipatch = useAppDispatch();
-    const isLogged = useAppSelector(selectIsLoggedIn);
-    const error = useAppSelector(selectError);
-    const userInfo = useAppSelector(selectUserInfo);
     const [email, onChangeEmail] = useState('');
     const [matKhau, onChangeMatKhau] = useState('');
 
-    const checkEmail = (emailCh: string) => {
-        if (emailCh) { return true; }
-        return false;
-    }
-
-    const checkPass = (passCh: string) => {
-        if (passCh) { return true; }
-        return false;
-    }
-
-    useEffect(() => {
-        if (isLogged) {
-            navigation.navigate('Register');
-        }
-    }, [isLogged, userInfo]);
-
     const handlerLogin = async () => {
-        navigation.navigate('Home Page');
+        await EncryptedStorage.clear();
+        let acc: Account = {username: email, password: matKhau};
+        await handleLogin(acc);
+        await userInfo();
+        const user = await EncryptedStorage.getItem('user_info');
+        await navigateToHome(user);
     }
+
+    const navigateToHome = async(user: any) =>{
+        if (user !== null){
+            navigation.navigate('Home Page');
+        } else {
+            Alert.alert('Tài khoản hoặc mật khẩu không đúng');
+        }
+    }
+
     return (
         <View style={styles.container}>
             <Text style={[styles.textCenter, styles.text]}>Energy Management System</Text>

@@ -1,15 +1,24 @@
 import axiosClient from "./axiosClient";
-import { Account, UserInfo, LoginResponse } from "../models/common";
+import { Account, LoginResponse } from "../models/common";
+import EncryptedStorage from 'react-native-encrypted-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const urlApi = 'api/auth'
+export const handleLogin = async(params: Account) =>{
+    try {
+        const res = await axiosClient.post('api/auth/login', params);
+        await EncryptedStorage.setItem("access_token", (res.data.access_token));
+        await EncryptedStorage.setItem("refresh_token", (res.data.refresh_token));
+    } catch (error) {
+        await EncryptedStorage.clear();
+        console.log("Tài khoản hoặc mật khẩu không chính xác");
+    }
+}
 
-export const authApi = {
-    login(params: Account): Promise<LoginResponse>{
-        const url = `http://192.168.1.10:9998/api/auth/login`;
-        return axiosClient.post(url, params)
-    },
-    getAccountInfo(): Promise<UserInfo> {
-        const url = `api/user`;
-        return axiosClient.get(url);
-    },
+export const userInfo = async () => {
+    try {
+        const res = await axiosClient.get('api/auth/user_info');
+        await EncryptedStorage.setItem('user_info', JSON.stringify(res.data));
+    } catch(error){
+        console.log(error);
+    }
 }

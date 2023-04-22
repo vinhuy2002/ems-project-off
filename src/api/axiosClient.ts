@@ -1,69 +1,48 @@
-import axios, {AxiosResponse,AxiosRequestConfig} from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import EncryptedStorage from 'react-native-encrypted-storage';
 import { LoginResponse } from '../models/common';
+
 
 const urlChange = 'http://192.168.1.10:9998/';
 
 const axiosClient = axios.create({
-  baseURL: urlChange,
-  headers: {
-    'content-type': 'application/json',
-    Accept: 'application/json',
-  },
+    baseURL: urlChange,
+    headers: {
+        'content-type': 'application/json',
+        Accept: 'application/json',
+        
+    },
 });
 
-const updateLocalAccessToken = (res: LoginResponse) => {
-  AsyncStorage.setItem('access_token', res.token);
-  AsyncStorage.setItem('refresh_token', res.refresh_token);
-};
-
-const getLocalRefreshToken = () => {
-  const token = AsyncStorage.getItem('refresh_token');
-  return token;
-};
-
-
-// Add a request interceptor
 axiosClient.interceptors.request.use(
-  async function (config: any) {
-    // Do something before request is sent
-    const token = await AsyncStorage.getItem('access_token');
-    if (token) {
-      config.headers.token = token;
-    }
-    return config;
-  },
-  function (error) {
-    // Do something with request error
+    async function(config) {
+        const access_token = await EncryptedStorage.getItem('access_token');
+        config.headers.Authorization = 'Bearer ' + access_token;
+        return config;
+}, function(error) {
     return Promise.reject(error);
-  },
-);
+});
 
-// Add a response interceptor
-axiosClient.interceptors.response.use(
-  function (response: AxiosResponse) {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
-    return response.data;
-  },
-  async function (error) {
+axiosClient.interceptors.response.use((response) => {
+    return response;
+}, async (error) => {
     const originalConfig = error.config;
     if (error.response.status === 401) {
       try {
-        const result = await getLocalRefreshToken();
-        const url = `${urlChange}api/auth/token`;
-        const rs: LoginResponse = await axios.post(url, {
+        const result = await EncryptedStorage.getItem('refresh_token');
+        const url = `http://192.168.1.10:9998/api/auth/token/`;
+        const data: LoginResponse = await axios.post(url, {
           refresh_token: result,
           
         });
-        updateLocalAccessToken(rs);
+        await EncryptedStorage.setItem("access_token", data.access_token);
+        await EncryptedStorage.setItem("refresh_token", data.refresh_token);
         return axiosClient(originalConfig);
       } catch (_error) {
         return Promise.reject(_error);
       }
     }
-
     return Promise.reject(error);
-  },
-);
+})
+
 export default axiosClient;

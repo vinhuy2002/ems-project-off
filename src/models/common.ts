@@ -1,7 +1,6 @@
 export interface LoginResponse {
-    token: string;
+    access_token: string;
     refresh_token: string;
-    [key: string]: any;
 }
 
 export interface Account {
