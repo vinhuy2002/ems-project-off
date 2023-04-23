@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet, TextInput, TouchableHighlight } from "r
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
-const Home1 = () => {
+const HomeReport = () => {
     return(
         <View>
             <Text>Hello</Text>
@@ -14,7 +14,7 @@ const Home1 = () => {
 const ReportIndex = () => {
     return (
         <Stack.Navigator initialRouteName="Report">
-            <Stack.Screen name="Report" component={Home1} />
+            <Stack.Screen name="Report" component={HomeReport} />
         </Stack.Navigator>
     );
 }

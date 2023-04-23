@@ -34,7 +34,7 @@ const CardGigaChart = () => {
             setSelectedIndex(value);
           }}
           buttonStyle= {{ padding: 5, height: 10, }}
-          containerStyle={{ marginBottom: 20, width: '60%', height: '100%', alignItems: 'center', backgroundColor:'green' }}
+          containerStyle={{ marginBottom: 20, width: '60%', height: '100%', alignItems: 'center'}}
         />
       </View>
       
@@ -90,10 +90,12 @@ const CardDisplayTotal = (props: itemName) => {
 const Home1 = ({ navigation }: any) => {
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView>
+      <ScrollView style={{paddingBottom: 20}}>
         <CardDisplayTotal imageId={0} />
         <CardDisplayTotal imageId={1} />
         <CardDisplayTotal imageId={2} />
+        <CardGigaChart />
+        <CardGigaChart />
         <CardGigaChart />
       </ScrollView>
 
