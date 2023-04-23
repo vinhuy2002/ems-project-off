@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, TouchableHighlight, Alert } from "react-native";
+import { View, Text, TextInput, TouchableHighlight, Alert, ToastAndroid } from "react-native";
 import styles from './styles';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { Account } from "../../models/common";
 import { handleLogin, userInfo } from "../../api/authApi";
+import { Image } from '@rneui/themed';
 
 const LoginIndex = ({ navigation }: any) => {
-    const [email, onChangeEmail] = useState('');
-    const [matKhau, onChangeMatKhau] = useState('');
+    const [email, onChangeEmail] = useState('ems_dev@iotmind.vn');
+    const [matKhau, onChangeMatKhau] = useState('123456');
 
     const handlerLogin = async () => {
         await EncryptedStorage.clear();
@@ -22,7 +23,7 @@ const LoginIndex = ({ navigation }: any) => {
         if (user !== null){
             navigation.navigate('Home Page');
         } else {
-            Alert.alert('Tài khoản hoặc mật khẩu không đúng');
+            ToastAndroid.showWithGravity('Tài khoản hoặc mật khẩu không chính xác!', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
         }
     }
 
