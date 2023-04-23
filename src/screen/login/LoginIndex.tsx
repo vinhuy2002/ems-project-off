@@ -23,7 +23,7 @@ const LoginIndex = ({ navigation }: any) => {
         if (user !== null){
             navigation.navigate('Home Page');
         } else {
-            ToastAndroid.showWithGravity('Tài khoản hoặc mật khẩu không chính xác!', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+            ToastAndroid.showWithGravity('Tài khoản hoặc mật khẩu nhập không chính xác!', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
         }
     }
 
