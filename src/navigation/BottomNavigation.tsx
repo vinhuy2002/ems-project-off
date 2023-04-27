@@ -7,20 +7,47 @@ import ReportIndex from "../screen/main-screen/report/ReportIndex";
 import SettingIndex from "../screen/main-screen/setting/SettingIndex";
 import Icon from "react-native-vector-icons/AntDesign";
 import MaterialDesign from "react-native-vector-icons/MaterialCommunityIcons"
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { View, Text } from "react-native";
 
 
-const Tab = createBottomTabNavigator();
+const BottomTab = createBottomTabNavigator();
+const TopTab = createMaterialTopTabNavigator();
+
+export const A2 = () => {
+  return (
+  <View>
+      <Text>This is report setting</Text>
+  </View>
+  );
+}
+export const A1 = () => {
+  return (
+  <View>
+      <Text>This is Home report setting</Text>
+  </View>
+  );
+}
+
+const HestTest = () => {
+  return(
+      <TopTab.Navigator>
+        <TopTab.Screen name="Thời gian" component={A1} />
+        <TopTab.Screen name="Thiết bị" component={A2} />
+      </TopTab.Navigator>
+  );
+}
 
 const BotttomNav = () => {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#43A047', tabBarInactiveTintColor: '#d5bdaf' }}>
-      <Tab.Screen name="Home" component={DashboardIndex} options={{
+    <BottomTab.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#43A047', tabBarInactiveTintColor: '#d5bdaf' }}>
+      <BottomTab.Screen name="Home" component={DashboardIndex} options={{
         tabBarLabel: 'Home',
         tabBarIcon: ({ color, size }) => (
           <Icon name="home" color={color} size={size} />
         ),
       }} />
-      <Tab.Screen name="Report" component={ReportIndex}
+      <BottomTab.Screen name="ReportIndex" component={ReportIndex}
         options={{
           tabBarLabel: 'Report',
           tabBarIcon: ({ color, size }) => (
@@ -28,7 +55,8 @@ const BotttomNav = () => {
           ),
         }}
       />
-      <Tab.Screen name="Alert" component={AlertIndex}
+      {/* <TopTab.Screen name="HestTest" component={HestTest}/> */}
+      <BottomTab.Screen name="AlertIndex" component={AlertIndex}
         options={{
           tabBarLabel: 'Alert',
           tabBarIcon: ({ color, size }) => (
@@ -36,7 +64,7 @@ const BotttomNav = () => {
           ),
         }}
       />
-      <Tab.Screen name="Setting" component={SettingIndex}
+      <BottomTab.Screen name="SettingIndex" component={SettingIndex}
         options={{
           tabBarLabel: 'Setting',
           tabBarIcon: ({ color, size }) => (
@@ -44,7 +72,7 @@ const BotttomNav = () => {
           ),
         }}
       />
-    </Tab.Navigator>
+    </BottomTab.Navigator>
   )
 }
 

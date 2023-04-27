@@ -11,7 +11,11 @@ interface itemName {
   imageId: number,
 };
 
-const CardGigaChart = () => {
+interface strName {
+  name: string,
+}
+
+const CardGigaChart = (props: strName) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   return (
     <Card containerStyle={{ borderRadius: 10 }}>
@@ -21,7 +25,7 @@ const CardGigaChart = () => {
           <CustomText> Giga Chart</CustomText>
         </View>
         <View style={{ alignItems: 'flex-end', width: '50%' }}>
-          <CustomText>Hsadashd</CustomText>
+          <CustomText>{props.name}</CustomText>
         </View>
       </View>
       <View style={[styles.directionRow, { alignItems: 'center', marginTop: 20 }]}>
@@ -89,17 +93,14 @@ const CardDisplayTotal = (props: itemName) => {
 
 const Home1 = ({ navigation }: any) => {
   return (
-    <View style={{ flex: 1 }}>
+    <View>
       <ScrollView style={{paddingBottom: 20}}>
         <CardDisplayTotal imageId={0} />
         <CardDisplayTotal imageId={1} />
         <CardDisplayTotal imageId={2} />
-        <CardGigaChart />
-        <CardGigaChart />
-        <CardGigaChart />
+        <CardGigaChart name='Tải'/>
+        <CardGigaChart name='Tiêu thụ'/>
       </ScrollView>
-
-
     </View>
   );
 }

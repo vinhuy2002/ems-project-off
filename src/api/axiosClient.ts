@@ -3,7 +3,7 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import { LoginResponse } from '../models/common';
 
 
-const urlChange = 'http://192.168.1.10:9998/';
+const urlChange = 'http://192.168.204.82:9998/';
 
 const axiosClient = axios.create({
     baseURL: urlChange,
@@ -30,7 +30,7 @@ axiosClient.interceptors.response.use((response) => {
     if (error.response.status === 401) {
       try {
         const result = await EncryptedStorage.getItem('refresh_token');
-        const url = `http://192.168.1.10:9998/api/auth/token/`;
+        const url = `${urlChange}api/auth/token/`;
         const data: LoginResponse = await axios.post(url, {
           refresh_token: result,
           

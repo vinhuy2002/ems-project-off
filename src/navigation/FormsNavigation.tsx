@@ -13,7 +13,7 @@ const FormsNav = () => {
         <Navigator initialRouteName="Login"  screenOptions={{headerShown: false}} >
             <Screen name="Login" component={LoginIndex} ></Screen>
             <Screen name="Register" component={RegisterIndex} ></Screen>
-            <Screen name="Home Page" component={BotttomNav}></Screen>
+            <Screen name="MainIndexPage" component={BotttomNav}></Screen>
         </Navigator>
     </NavigationContainer>
     );

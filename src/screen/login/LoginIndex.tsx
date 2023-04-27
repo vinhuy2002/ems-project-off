@@ -11,17 +11,18 @@ const LoginIndex = ({ navigation }: any) => {
     const [matKhau, onChangeMatKhau] = useState('123456');
 
     const handlerLogin = async () => {
-        await EncryptedStorage.clear();
-        let acc: Account = {username: email, password: matKhau};
-        await handleLogin(acc);
-        await userInfo();
-        const user = await EncryptedStorage.getItem('user_info');
-        await navigateToHome(user);
+        // await EncryptedStorage.clear();
+        // let acc: Account = {username: email, password: matKhau};
+        // await handleLogin(acc);
+        // await userInfo();
+        // const user = await EncryptedStorage.getItem('user_info');
+        // await navigateToHome(user);
+        navigation.navigate('MainIndexPage');
     }
 
     const navigateToHome = async(user: any) =>{
         if (user !== null){
-            navigation.navigate('Home Page');
+            navigation.navigate('MainIndexPage');
         } else {
             ToastAndroid.showWithGravity('Tài khoản hoặc mật khẩu nhập không chính xác!', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
         }
