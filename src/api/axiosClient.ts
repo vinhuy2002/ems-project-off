@@ -3,7 +3,7 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import { LoginResponse } from '../models/common';
 
 
-const urlChange = 'http://192.168.204.82:9998/';
+const urlChange = 'http://192.168.1.10:9998/';
 
 const axiosClient = axios.create({
     baseURL: urlChange,

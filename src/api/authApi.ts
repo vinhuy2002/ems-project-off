@@ -1,7 +1,6 @@
 import axiosClient from "./axiosClient";
 import { Account, LoginResponse } from "../models/common";
 import EncryptedStorage from 'react-native-encrypted-storage';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const handleLogin = async(params: Account) =>{
     try {

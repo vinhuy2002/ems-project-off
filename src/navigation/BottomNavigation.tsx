@@ -55,7 +55,6 @@ const BotttomNav = () => {
           ),
         }}
       />
-      {/* <TopTab.Screen name="HestTest" component={HestTest}/> */}
       <BottomTab.Screen name="AlertIndex" component={AlertIndex}
         options={{
           tabBarLabel: 'Alert',

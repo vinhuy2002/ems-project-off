@@ -4,6 +4,8 @@ const styles = StyleSheet.create({
     directionRow: {
         flexDirection: 'row',
         width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     smallDirRow:{
         flexDirection: 'row',
@@ -27,6 +29,9 @@ const styles = StyleSheet.create({
         fontFamily: 'Inter-Medium',
         fontSize: 16,
         color: '#000000',
+    },
+    padLeft: {
+        paddingLeft: 2,
     },
     centerRow: {
         flexDirection: 'row',

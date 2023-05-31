@@ -5,15 +5,17 @@ const styles = StyleSheet.create(
         container: {
             flex: 1,
             padding: 24,
-            backgroundColor: '#FCFCFC',
+            // backgroundColor: '#FCFCFC',
             height: '100%',
             justifyContent: 'center',
         },
         box: {
-            borderWidth: 1,
+            // borderWidth: 1,
             borderRadius: 5,
             width: '100%',
-            borderColor: '#d5bdaf',
+            // borderColor: '#d5bdaf',
+            backgroundColor: '#224957',
+            paddingLeft: 10,
         },
         button: {
             padding: 10,
@@ -40,8 +42,8 @@ const styles = StyleSheet.create(
         },
         text: {
             fontFamily: 'Inter-Medium',
-            fontSize: 16,
-            color: '#000000'
+            fontSize: 18,
+            color: '#ffffff'
         },
     }
 );
